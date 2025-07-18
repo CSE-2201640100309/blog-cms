@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Post</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="postContainer"></div>
+  <a href="index.html">← Back to Home</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = Number(params.get('id'));
+
+    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+    const post = posts.find(p => p.id === postId);
+
+    const container = document.getElementById('postContainer');
+    if (post) {
+      container.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+    } else {
+      container.innerHTML = `<p>Post not found.</p>`;
+    }
+  </script>
+</body>
+</html>
